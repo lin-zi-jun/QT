@@ -11,14 +11,17 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    testdialog.cpp \
     testwidget.cpp
 
 HEADERS += \
     mainwindow.h \
+    testdialog.h \
     testwidget.h
 
 FORMS += \
     mainwindow.ui \
+    testdialog.ui \
     testwidget.ui
 
 # Default rules for deployment.
