@@ -228,52 +228,50 @@ bool MainWindow::SaveUartParam(void)
 //根据配置文件初始化参数
 void MainWindow::IniParamInit(void)
 {
-    if(QFile::exists("qss/param.ini"))
-    {
+
+    //1.初始化配置文件
+    if(QFile::exists("qss/param.ini")){
        configIni = new QSettings("qss/param.ini", QSettings::IniFormat);
-    }
-    else if(QFile::exists("/qss/param.ini"))
-    {
+    }else if(QFile::exists("/qss/param.ini")){
        configIni = new QSettings("/qss/param.ini", QSettings::IniFormat);
-    }
-    else
-    {
+    }else{
        configIni = NULL;
        return;
     }
 
+    //2.初始化编码格式
     configIni->setIniCodec("UTF-8");
 
-    //波特率
+    //3.波特率
     QString  baudRate = configIni->value("uartParam/BaudRate").toString();
     ui->rateBox->setCurrentText(baudRate);
 
-    //数据位
+    //4.数据位
     QString  dataBit = configIni->value("uartParam/DataBit").toString();
     ui->dataBox->setCurrentText(dataBit);
 
-    //奇偶校验位
+    //5.奇偶校验位
     QString  parity = configIni->value("uartParam/Parity").toString();
     qDebug()<<"parity:"<<parity;
     ui->checkBox->setCurrentText(parity);
 
-    //停止位
+    //6.停止位
     QString  stopBit = configIni->value("uartParam/StopBit").toString();
     ui->stopBox->setCurrentText(stopBit);
 
-    //时间戳
+    //1.时间戳
     bool  hasTimeStamp = configIni->value("uartParam/timestamp").toBool();
     ui->timeZoneCheckBox->setChecked(hasTimeStamp);
 
-    //回车换行
+    //2.回车换行
     bool  hasAT = configIni->value("uartParam/AT").toBool();
     ui->changeLineCheckBox->setChecked(hasAT);
 
-    //HEX发送
+    //3.HEX发送
     bool  hexSend = configIni->value("uartParam/HEXS").toBool();
     ui->checkBoxHexS->setChecked(hexSend);
 
-    //HEX显示
+    //4.HEX显示
     bool  hexRec = configIni->value("uartParam/HEXR").toBool();
     ui->checkBoxHexR->setChecked(hexRec);
 }
