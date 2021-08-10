@@ -189,11 +189,11 @@ bool MainWindow::SaveUartParam(void)
     //波特率
     configIni->setValue("uartParam/BaudRate",ui->rateBox->currentText());
     //数据位
-    configIni->setValue("uartParam/DataBit",ui->dataBox->currentText());
+    // configIni->setValue("uartParam/DataBit",ui->dataBox->currentText());
     //奇偶校验位
-    configIni->setValue("uartParam/Parity",ui->checkBox->currentText());
+    // configIni->setValue("uartParam/Parity",ui->checkBox->currentText());
     //停止位
-    configIni->setValue("uartParam/StopBit",ui->stopBox->currentText());
+    // configIni->setValue("uartParam/StopBit",ui->stopBox->currentText());
     //时间戳
     configIni->setValue("uartParam/timestamp",ui->timeZoneCheckBox->isChecked());
     //AT
@@ -239,7 +239,7 @@ void MainWindow::IniParamInit(void)
        return;
     }
 
-    //2.初始化编码格式
+    // 2.初始化编码格式
     configIni->setIniCodec("UTF-8");
 
     //3.波特率
@@ -247,17 +247,17 @@ void MainWindow::IniParamInit(void)
     ui->rateBox->setCurrentText(baudRate);
 
     //4.数据位
-    QString  dataBit = configIni->value("uartParam/DataBit").toString();
-    ui->dataBox->setCurrentText(dataBit);
+    // QString  dataBit = configIni->value("uartParam/DataBit").toString();
+    // ui->dataBox->setCurrentText(dataBit);
 
     //5.奇偶校验位
-    QString  parity = configIni->value("uartParam/Parity").toString();
-    qDebug()<<"parity:"<<parity;
-    ui->checkBox->setCurrentText(parity);
+    // QString  parity = configIni->value("uartParam/Parity").toString();
+    // qDebug()<<"parity:"<<parity;
+    // ui->checkBox->setCurrentText(parity);
 
     //6.停止位
-    QString  stopBit = configIni->value("uartParam/StopBit").toString();
-    ui->stopBox->setCurrentText(stopBit);
+    // QString  stopBit = configIni->value("uartParam/StopBit").toString();
+    // ui->stopBox->setCurrentText(stopBit);
 
     //1.时间戳
     bool  hasTimeStamp = configIni->value("uartParam/timestamp").toBool();
@@ -344,15 +344,15 @@ void MainWindow::PortConfigureInit()
     ui->rateBox->addItem("115200","115200");
     ui->rateBox->addItem("921600","921600");
 
-    ui->dataBox->addItem("8",8);
-    ui->dataBox->addItem("7",7);
+    // ui->dataBox->addItem("8",8);
+    // ui->dataBox->addItem("7",7);
 
-    ui->checkBox->addItem("无校验",0);
-    ui->checkBox->addItem("奇校验",1);
-    ui->checkBox->addItem("偶校验",2);
+    // ui->checkBox->addItem("无校验",0);
+    // ui->checkBox->addItem("奇校验",1);
+    // ui->checkBox->addItem("偶校验",2);
 
-    ui->stopBox->addItem("1位",1);
-    ui->stopBox->addItem("2位",2);
+    // ui->stopBox->addItem("1位",1);
+    // ui->stopBox->addItem("2位",2);
 
     //设置时间输入框只允许使用数字
     ui->overTimeRecEdit->setValidator(new QRegExpValidator(QRegExp("^([0-9]{1,4}(.[0-9]{1,3})?)$")));
@@ -379,52 +379,52 @@ void MainWindow::on_openSerialButton_clicked()
         //设置波特率
         serial->setBaudRate(ui->rateBox->currentText().toInt());
         //设置数据位
-        switch (ui->dataBox->currentData().toInt())
-        {
-            case 8:
-                serial->setDataBits(QSerialPort::Data8);
-                break;
-            case 7:
-                serial->setDataBits(QSerialPort::Data7);
-                break;
-            default:
-                break;
-        }
+        // switch (ui->dataBox->currentData().toInt())
+        // {
+        //     case 8:
+        //         serial->setDataBits(QSerialPort::Data8);
+        //         break;
+        //     case 7:
+        //         serial->setDataBits(QSerialPort::Data7);
+        //         break;
+        //     default:
+        //         break;
+        // }
         //设置校验位
-        switch (ui->checkBox->currentIndex())
-        {
-            case 0:
-                serial->setParity(QSerialPort::NoParity);
-                break;
-            case 1:
-                serial->setParity(QSerialPort::EvenParity);
-                break;
-            case 2:
-                serial->setParity(QSerialPort::OddParity);
-                break;
-            default:
-                break;
-        }
+        // switch (ui->checkBox->currentIndex())
+        // {
+        //     case 0:
+        //         serial->setParity(QSerialPort::NoParity);
+        //         break;
+        //     case 1:
+        //         serial->setParity(QSerialPort::EvenParity);
+        //         break;
+        //     case 2:
+        //         serial->setParity(QSerialPort::OddParity);
+        //         break;
+        //     default:
+        //         break;
+        // }
         //设置停止位
-        switch(ui->stopBox->currentIndex())
-        {
-            case 0:
-                serial->setStopBits(QSerialPort::OneStop);
-                break;
-            case 1:
-                serial->setStopBits(QSerialPort::TwoStop);
-                break;
-            default:
-                break;
-        }
+        // switch(ui->stopBox->currentIndex())
+        // {
+        //     case 0:
+        //         serial->setStopBits(QSerialPort::OneStop);
+        //         break;
+        //     case 1:
+        //         serial->setStopBits(QSerialPort::TwoStop);
+        //         break;
+        //     default:
+        //         break;
+        // }
         //设置流控制
         serial->setFlowControl(QSerialPort::NoFlowControl); //设置为无流控制
 
         //关闭设置菜单使能
         ui->portBox->setEnabled(false);
-        ui->dataBox->setEnabled(false);
-        ui->checkBox->setEnabled(false);
-        ui->stopBox->setEnabled(false);
+        // ui->dataBox->setEnabled(false);
+        // ui->checkBox->setEnabled(false);
+        // ui->stopBox->setEnabled(false);
         ui->rateBox->setEnabled(false);
         ui->openSerialButton->setText("关闭串口");
 
@@ -451,9 +451,9 @@ void MainWindow::on_openSerialButton_clicked()
         //恢复使能
         ui->portBox->setEnabled(true);
         ui->rateBox->setEnabled(true);
-        ui->dataBox->setEnabled(true);
-        ui->checkBox->setEnabled(true);
-        ui->stopBox->setEnabled(true);
+        // ui->dataBox->setEnabled(true);
+        // ui->checkBox->setEnabled(true);
+        // ui->stopBox->setEnabled(true);
         ui->openSerialButton->setText("打开串口");
         ui->openSerialButton->setStyleSheet("");
     }
