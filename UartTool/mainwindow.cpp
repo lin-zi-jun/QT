@@ -200,9 +200,9 @@ bool MainWindow::SaveUartParam(void)
     configIni->setValue("uartParam/AT",ui->changeLineCheckBox->isChecked());
 
     //HEX发送
-    configIni->setValue("uartParam/HEXS",ui->checkBoxHexS->isChecked());
+    // configIni->setValue("uartParam/HEXS",ui->checkBoxHexS->isChecked());
     //HEX显示
-    configIni->setValue("uartParam/HEXR",ui->checkBoxHexR->isChecked());
+    // configIni->setValue("uartParam/HEXR",ui->checkBoxHexR->isChecked());
 
     //命令面板相关
     qint32 rowNum = ui->tableWidget->rowCount();
@@ -267,13 +267,13 @@ void MainWindow::IniParamInit(void)
     bool  hasAT = configIni->value("uartParam/AT").toBool();
     ui->changeLineCheckBox->setChecked(hasAT);
 
-    //3.HEX发送
-    bool  hexSend = configIni->value("uartParam/HEXS").toBool();
-    ui->checkBoxHexS->setChecked(hexSend);
+    // //3.HEX发送
+    // bool  hexSend = configIni->value("uartParam/HEXS").toBool();
+    // ui->checkBoxHexS->setChecked(hexSend);
 
     //4.HEX显示
-    bool  hexRec = configIni->value("uartParam/HEXR").toBool();
-    ui->checkBoxHexR->setChecked(hexRec);
+    // bool  hexRec = configIni->value("uartParam/HEXR").toBool();
+    // ui->checkBoxHexR->setChecked(hexRec);
 }
 
 //初始化命令列表
@@ -500,53 +500,53 @@ void MainWindow::insertDataToPlain()
     {
         tempRecData.append(curDateTime.toString("[hh:mm:ss]")).append("R:");
         ui->uartReadPlain->insertPlainText(tempRecData);
-        if(ui->checkBoxHexR->isChecked())
-        {
-            QString ss;
-            for(int c :uart_rec_ss)
-            {
-                if(c>=0)
-                {
-                    ss += QString(" %1")
-                            .arg(c, 2, 16, QChar('0'));
-                }
-                else
-                {
-                    ss += QString(" %1")
-                            .arg(c+256, 2, 16, QChar('0'));
-                }
-            }
-            ui->uartReadPlain->insertPlainText(ss);
-        }
-        else
-        {
+        // if(ui->checkBoxHexR->isChecked())
+        // {
+        //     QString ss;
+        //     for(int c :uart_rec_ss)
+        //     {
+        //         if(c>=0)
+        //         {
+        //             ss += QString(" %1")
+        //                     .arg(c, 2, 16, QChar('0'));
+        //         }
+        //         else
+        //         {
+        //             ss += QString(" %1")
+        //                     .arg(c+256, 2, 16, QChar('0'));
+        //         }
+        //     }
+        //     ui->uartReadPlain->insertPlainText(ss);
+        // }
+        // else
+        // {
             ui->uartReadPlain->insertPlainText(uart_rec_ss);
-        }
+        // }
     }
     else
     {
-        if(ui->checkBoxHexR->isChecked())
-        {
-            QString ss;
-            for(int c :uart_rec_ss)
-            {
-                if(c>=0)
-                {
-                    ss += QString(" %1")
-                            .arg(c, 2, 16, QChar('0'));
-                }
-                else
-                {
-                    ss += QString(" %1")
-                            .arg(c+256, 2, 16, QChar('0'));
-                }
-            }
-            ui->uartReadPlain->insertPlainText(ss);
-        }
-        else
-        {
+        // if(ui->checkBoxHexR->isChecked())
+        // {
+        //     QString ss;
+        //     for(int c :uart_rec_ss)
+        //     {
+        //         if(c>=0)
+        //         {
+        //             ss += QString(" %1")
+        //                     .arg(c, 2, 16, QChar('0'));
+        //         }
+        //         else
+        //         {
+        //             ss += QString(" %1")
+        //                     .arg(c+256, 2, 16, QChar('0'));
+        //         }
+        //     }
+        //     ui->uartReadPlain->insertPlainText(ss);
+        // }
+        // else
+        // {
             ui->uartReadPlain->insertPlainText(uart_rec_ss);
-        }
+        // }
     }
     ui->uartReadPlain->moveCursor(QTextCursor::End);        //光标移动到结尾
 }
@@ -563,7 +563,7 @@ void MainWindow::on_sendDataButton_clicked()
     QString command = ui->uartWritePlain->toPlainText();
 
     //发送数据
-    QString recShowData = sendUartData(command,ui->checkBoxHexS->isChecked(),
+    QString recShowData = sendUartData(command,0,
                  ui->timeZoneCheckBox->isChecked(),ui->changeLineCheckBox->isChecked());
 
     if(ui->timeZoneCheckBox->isChecked())

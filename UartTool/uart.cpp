@@ -20,31 +20,31 @@ QString MainWindow::sendUartData(QString data,bool isHex,bool hasTimerStamp,bool
         showBuff = tempStr + command;
     }
 
-    //HEX格式发送
-    if(isHex){
-        //将接收到的HEX格式字符串转为HEX格式原始数据
-        QByteArray arr;
+    // //HEX格式发送
+    // if(isHex){
+    //     //将接收到的HEX格式字符串转为HEX格式原始数据
+    //     QByteArray arr;
 
-        //分析字符串格式中是否带空格
-        for(int i = 0;i<data.size();i++)
-        {
-            if(data[i]==' ')
-                continue;   //跳过
+    //     //分析字符串格式中是否带空格
+    //     for(int i = 0;i<data.size();i++)
+    //     {
+    //         if(data[i]==' ')
+    //             continue;   //跳过
 
-            int num  = data.mid(i,2).toUInt(nullptr,16);
-            i++;
+    //         int num  = data.mid(i,2).toUInt(nullptr,16);
+    //         i++;
 
-            arr.append(num);
-        }
+    //         arr.append(num);
+    //     }
 
-        send_buf_len += arr.length();
-        //发送HEX格式原始数据
-        serial->write(arr);
+    //     send_buf_len += arr.length();
+    //     //发送HEX格式原始数据
+    //     serial->write(arr);
 
-        //返回HEX格式字符串显示到串口接收面板
-        return showBuff;
-    }
-    //非HEX格式发送
+    //     //返回HEX格式字符串显示到串口接收面板
+    //     return showBuff;
+    // }
+    // //非HEX格式发送
     else {
         send_buf_len += data.length();
         serial->write(command.toLatin1());
